@@ -32,8 +32,14 @@ export default function Overlays() {
         setShowBorder(!showBorder);
     };
 
+    const [priceType, setPriceType] = useState('unit'); // Default to 'unit'
+
+    const handlePriceTypeChange = (event) => {
+        setPriceType(event.target.value);
+    };
+
     return (
-        <div className="container mx-auto my-6 w-full h-fit sm:w-1/2 bg-neutral-50 rounded-lg ring-2 ring-purple-300 shadow-xl shadow-purple-300 justify-evenly gap-4 p-4">
+        <form className="container mx-auto my-6 w-full h-fit sm:w-1/2 bg-neutral-50 rounded-lg ring-2 ring-purple-300 shadow-xl shadow-purple-300 justify-evenly gap-4 p-4">
             <span className="font-bold text-purple-300">Notification Box:</span>
 
             {['background', 'highlight', 'text'].map((colorType) => (
@@ -81,9 +87,38 @@ export default function Overlays() {
                     className="form-checkbox h-6 w-6 text-purple-300"
                 />
             </div>
+
+            <div className="mb-4 mx-auto">
+                <span className="">Tipe Besaran Harga:</span>
+                <div className="flex items-center">
+                    <label className="mr-4">
+                        <input
+                            type="radio"
+                            name="priceType"
+                            value="unit"
+                            checked={priceType === 'unit'}
+                            onChange={handlePriceTypeChange}
+                            className="mr-2"
+                        />
+                        Unit Traktiran
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="priceType"
+                            value="nominal"
+                            checked={priceType === 'nominal'}
+                            onChange={handlePriceTypeChange}
+                            className="mr-2"
+                        />
+                        Nominal (Rupiah)
+                    </label>
+                </div>
+            </div>
+
             
             <Save />
 
-        </div>
+        </form>
     );
 }
