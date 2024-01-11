@@ -32,10 +32,10 @@ export default function Overlays() {
         setShowBorder(!showBorder);
     };
 
-    const [priceType, setPriceType] = useState('unit'); // Default to 'unit'
+    const [isUnit, setIsUnit] = useState(false);
 
-    const handlePriceTypeChange = (event) => {
-        setPriceType(event.target.value);
+    const handleToggleChange = () => {
+        setIsUnit(!isUnit);
     };
 
     return (
@@ -89,30 +89,16 @@ export default function Overlays() {
             </div>
 
             <div className="mb-4 mx-auto">
-                <span className="">Tipe Besaran Harga:</span>
-                <div className="flex items-center">
-                    <label className="mr-4">
-                        <input
-                            type="radio"
-                            name="priceType"
-                            value="unit"
-                            checked={priceType === 'unit'}
-                            onChange={handlePriceTypeChange}
-                            className="mr-2"
-                        />
-                        Unit Traktiran
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="priceType"
-                            value="nominal"
-                            checked={priceType === 'nominal'}
-                            onChange={handlePriceTypeChange}
-                            className="mr-2"
-                        />
-                        Nominal (Rupiah)
-                    </label>
+                <span className="">Tipe Unit:</span>
+                <div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="" className="sr-only peer" onChange={handleToggleChange} checked={isUnit} />
+                    <div className={`peer ring-0 ${isUnit ? 'bg-emerald-500' : 'bg-rose-400'} rounded-full outline-none duration-300 after:duration-500 w-7 h-7 shadow-md peer-checked:bg-emerald-500 peer-focus:outline-none after:content-['✖️'] after:rounded-full after:absolute after:outline-none after:h-5 after:w-5 after:bg-gray-50 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-hover:after:scale-75 peer-checked:after:content-['✔️'] after:-rotate-180 peer-checked:after:rotate-0`}>
+                    </div>
+                    <span className="ml-2">{isUnit ? 'Unit Traktiran' : 'Nominal (Rupiah)'}</span>
+                </label>
+
+
                 </div>
             </div>
 
